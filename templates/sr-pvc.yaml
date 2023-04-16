@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "sr-chart.fullname" . }}-sr-pvc
+  labels:
+    env: poc
+  {{- include "sr-chart.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.srPvc.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.srPvc.storageClass | quote }}

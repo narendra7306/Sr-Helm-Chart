@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "sr-chart.fullname" . }}-airflow-configmap
+  labels:
+    env: poc
+  {{- include "sr-chart.labels" . | nindent 4 }}
+data:
+  airflow.cfg: {{ .Values.airflowConfigmap.airflowCfg | quote }}
+  deploy.sh: {{ .Values.airflowConfigmap.deploySh | quote }}

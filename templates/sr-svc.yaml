@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sr-chart.fullname" . }}-sr-svc
+  labels:
+    env: poc
+  {{- include "sr-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.srSvc.type }}
+  selector:
+    env: poc
+  {{- include "sr-chart.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.srSvc.ports | toYaml | nindent 2 -}}
